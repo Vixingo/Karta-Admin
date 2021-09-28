@@ -13,8 +13,6 @@ import {
 
 const userFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    <TextInput source="name" label="Name" reference="users" allowEmpty />,
-    <TextInput source="email" label="Email" reference="users" allowEmpty />,
 ];
 
 export const UserList = props => (
@@ -30,7 +28,7 @@ export const UserList = props => (
 export const UserEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" />
+            <TextInput source="name" />
             <TextInput source="email" />
             <PasswordInput source="password" />
         </SimpleForm>
@@ -40,6 +38,7 @@ export const UserEdit = props => (
 export const UserCreate = props => (
     <Create {...props}>
         <SimpleForm>
+            <TextInput source="name" />
             <TextInput source="email" />
             <PasswordInput source="password" />
         </SimpleForm>
