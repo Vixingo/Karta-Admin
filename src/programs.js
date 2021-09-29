@@ -11,6 +11,8 @@ import {
     ReferenceInput,
     Create,
 } from 'react-admin';
+import { Typography } from '@material-ui/core';
+import QRCode from 'qrcode.react';
 
 const programFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -18,6 +20,44 @@ const programFilters = [
         <SelectInput optionText="name" />
     </ReferenceInput>,
 ];
+
+const downloadQR = e  => {
+    e && e.preventDefault();
+    const canvas = document.getElementById("qrCodeEl");
+    if (!canvas) return false;
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `qrCode.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    return false;
+  };
+
+const Aside = ({ record }) => (
+    <div style={{ width: 300, margin: '3em' }}>
+        <Typography variant="h6">Program URL QR Code</Typography>
+        {record && (
+            <>
+                <QRCode
+                    id="qrCodeEl"
+                    value={record.url}
+                    size={192}
+                    bgColor={"#ffffff"}
+                    fgColor={"#000000"}
+                    level={"L"}
+                    includeMargin={false}
+                />
+                <div style={{margin: '1em'}}>
+                    <a href="/" style={{color: 'blue', cursor: 'pointer'}} onClick={downloadQR}>Download QR</a>
+                </div>
+            </>
+        )}
+    </div>
+);
 
 export const ProgramList = props => (
     <List filters={programFilters} {...props}>
@@ -32,14 +72,17 @@ export const ProgramList = props => (
 );
 
 export const ProgramEdit = props => (
-    <Edit {...props}>
-        <SimpleForm>
-            <ReferenceInput disabled source="partnerId" reference="partners">
-                <SelectInput optionText="name" />
-            </ReferenceInput>
-            <TextInput source="name" />
-        </SimpleForm>
-    </Edit>
+    <>
+        <Edit aside={<Aside />} {...props}>
+            <SimpleForm>
+                <ReferenceInput disabled source="partnerId" reference="partners">
+                    <SelectInput optionText="name" />
+                </ReferenceInput>
+                <TextInput source="name" />
+                <TextInput source="url" />
+            </SimpleForm>
+        </Edit>
+    </>
 );
 
 export const ProgramCreate = props => (
@@ -49,6 +92,7 @@ export const ProgramCreate = props => (
                 <SelectInput optionText="name" />
             </ReferenceInput>
             <TextInput source="name" />
+            <TextInput source="url" />
         </SimpleForm>
     </Create>
 );
