@@ -10,6 +10,9 @@ import {
     SelectInput,
     ReferenceInput,
     Create,
+    EditButton,
+    Show,
+    SimpleShowLayout,
 } from 'react-admin';
 import { Typography } from '@material-ui/core';
 import QRCode from 'qrcode.react';
@@ -59,14 +62,19 @@ const Aside = ({ record }) => (
     </div>
 );
 
+const ProgramEditButton = ({ record }) => (
+    <EditButton basePath="/programs" label="Edit" record={record} />
+);
+
 export const ProgramList = props => (
     <List filters={programFilters} {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <ReferenceField source="partnerId" reference="partners">
                 <TextField source="name" />
             </ReferenceField>
             <TextField source="name" />
+            <ProgramEditButton />
         </Datagrid>
     </List>
 );
@@ -95,4 +103,17 @@ export const ProgramCreate = props => (
             <TextInput source="url" />
         </SimpleForm>
     </Create>
+);
+
+export const ProgramShow = props => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <TextField source="id" />
+            <ReferenceField source="partnerId" reference="partners">
+                <TextField source="name" />
+            </ReferenceField>
+            <TextField source="name" />
+            <TextField source="url" />
+        </SimpleShowLayout>
+    </Show>
 );

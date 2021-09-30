@@ -9,18 +9,26 @@ import {
     TextInput, 
     PasswordInput,
     Create,
+    EditButton,
+    Show,
+    SimpleShowLayout,   
 } from 'react-admin';
 
 const userFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
 ];
 
+const UserEditButton = ({ record }) => (
+    <EditButton basePath="/users" label="Edit" record={record} />
+);
+
 export const UserList = props => (
     <List filters={userFilters} {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
+            <UserEditButton />
         </Datagrid>
     </List>
 );
@@ -43,4 +51,14 @@ export const UserCreate = props => (
             <PasswordInput source="password" />
         </SimpleForm>
     </Create>
-    );
+);
+
+export const UserShow = props => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <TextField source="id" />
+            <TextField source="name" />
+            <EmailField source="email" />
+        </SimpleShowLayout>
+    </Show>
+);

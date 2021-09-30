@@ -30,7 +30,8 @@
     {
       "id": 1,
       "name": "special_virtual_card_coffee",
-      "partnerId": 1
+      "partnerId": 1,
+      "url": "https://special.com.au"
     }
   ],
   "cards": [

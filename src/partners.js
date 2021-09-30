@@ -9,6 +9,9 @@ import {
     ReferenceInput,
     SelectInput, 
     Create,
+    EditButton,
+    Show,
+    SimpleShowLayout,
 } from 'react-admin';
 
 const partnerFilters = [
@@ -18,11 +21,16 @@ const partnerFilters = [
     </ReferenceInput>,
 ];
 
+const PartnerEditButton = ({ record }) => (
+    <EditButton basePath="/partners" label="Edit" record={record} />
+);
+
 export const PartnerList = props => (
     <List filters={partnerFilters} {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <TextField source="name" />
+            <PartnerEditButton />
         </Datagrid>
     </List>
 );
@@ -43,4 +51,14 @@ export const PartnerCreate = props => (
             <TextInput source="api_key" />
         </SimpleForm>
     </Create>
-    );
+);
+
+export const PartnerShow = props => (
+    <Show {...props}>
+        <SimpleShowLayout>
+        <TextField source="id" />
+            <TextField source="name" />
+            <TextField source="api_key" />
+        </SimpleShowLayout>
+    </Show>
+);
