@@ -8,7 +8,10 @@ import {
     SelectInput, 
     Edit, 
     SimpleForm, 
-    TextInput
+    TextInput,
+    EditButton,
+    Show,
+    SimpleShowLayout,
 } from 'react-admin';
 
 const cardFilters = [
@@ -18,9 +21,13 @@ const cardFilters = [
 </ReferenceInput>,
 ];
 
+const CardEditButton = ({ record }) => (
+    <EditButton basePath="/cards" label="Edit" record={record} />
+);
+
 export const CardList = props => (
     <List filters={cardFilters} {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="cardId" />
             <ReferenceField source="userId" reference="users">
                 <TextField source="name" />
@@ -29,6 +36,7 @@ export const CardList = props => (
                 <TextField source="name" />
             </ReferenceField>
             <TextField source="state" />
+            <CardEditButton />
         </Datagrid>
     </List>
 );
@@ -61,4 +69,34 @@ export const CardEdit = props => (
             <TextInput disabled source="encryptedId" />
         </SimpleForm>
     </Edit>
+);
+
+export const CardShow = props => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <ReferenceField disabled source="userId" reference="users">
+                <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField disabled source="programId" reference="programs">
+                <TextField source="name" />
+            </ReferenceField>
+            <TextField disabled source="cardId" />
+            <TextField disabled source="cardId" />
+            <TextField disabled source="cardId" />
+            <TextField disabled source="cardNumber" />
+            <TextField disabled source="panFirst6" />
+            <TextField disabled source="panLast4" />
+            <TextField disabled source="type" />
+            <TextField disabled source="state" />
+            <TextField disabled source="sequenceNumber" />
+            <TextField disabled source="cardProfileName" />
+            <TextField disabled source="pinFailCount" />
+            <TextField disabled source="reissue" />
+            <TextField disabled source="expiry" />
+            <TextField disabled source="embossedName" />
+            <TextField disabled source="pan" />
+            <TextField disabled source="cvv2" />
+            <TextField disabled source="encryptedId" />
+        </SimpleShowLayout>
+    </Show>
 );
