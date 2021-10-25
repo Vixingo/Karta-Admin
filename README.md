@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `yarn start` or `npm run start`
+### `yarn start` 
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,12 +14,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test` or `npm run test`
+### `yarn test` 
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build` or `npm run build`
+### `yarn build` 
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -31,8 +31,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 # Fake DB
 
-Until we develope a backend APIs and persistent DB, the project is using [JSON-Server](https://github.com/typicode/json-server) data provider.
+Until we develop a backend APIs and persistent DB, the project is using [JSON-Server](https://github.com/typicode/json-server) data provider.
 There is a db.json at the project root with fake data that is used for CRUD operations. 
 
 ## Script
 `json-server --watch db.json --port 3004`
+On Windows, the above will not work so you have to run `yarn start-server`
