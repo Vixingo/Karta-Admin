@@ -22,7 +22,7 @@ const cardFilters = [
 ];
 
 const CardEditButton = ({ record }) => (
-    <EditButton basePath="/cards" label="Edit" record={record} />
+    <EditButton basePath="/cards" label="Edit " record={record} />
 );
 
 export const CardList = props => (
